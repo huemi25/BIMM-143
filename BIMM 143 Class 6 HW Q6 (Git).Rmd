@@ -1,0 +1,80 @@
+---
+title: "BIMM 143 Class 6 HW Q6 (Git)"
+author: "Mi Tran A15556214"
+date: "10/26/2021"
+output: pdf_document
+---
+---
+title: "BIMM 143 Class 6 HW"
+author: "Mi Tran A15556214"
+date: "10/25/2021"
+output: pdf_document
+---
+# Analysis of Drug Interactions 
+
+## Given code
+
+```{r}
+library(bio3d)
+s1 <- read.pdb("4AKE")  # kinase with drug
+s2 <- read.pdb("1AKE")  # kinase no drug
+s3 <- read.pdb("1E4Y")  # kinase with drug
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA")
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+```
+
+# Question 6: How would you generalize the original code above to work with any set of input protein structures?
+
+## Take s1 for example, the repeated code lines are:
+### s1 <- read.pdb("4AKE")  # kinase with drug
+### s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+### s1.b <- s1.chainA$atom$b
+### plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+
+> 1. The inputs to the function are .pdb files, which are being read by the command read.pdb().
+
+> 2. The function I will be creating takes data from the .pbd files and trim it down to what we need. Then it chooses a specific chain and plots the results in a graph.
+
+> 3. The output of the function is a plot for a specified protein, specifically analyzes protein drug interactions by reading any protein PDB data.
+
+## From looking at the repeated code lines, we can combine them into function(), naming this function "pdbplot".
+
+```{r}
+# First, we need to load bio3d and read specific PDB files.
+library(bio3d)
+s1 <- read.pdb("4AKE") #kinase with drug
+s2 <- read.pdb("1AKE") #kinase no drug
+s3 <- read.pdb("1E4Y") #kinase with drug
+
+# Creating the function "pdbplot"
+pdbplot <- function(s1) {
+  
+  s1.chainA1 <- trim.pdb(s1, chain="A", elety="CA")    # trim the chain
+  s1.b <- s1.chainA1$atom$b   # creates new data frame with B-factor values 
+  # from the atom data frame
+  plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")   # creates a plot of 
+  # B-factor by atoms in the chain
+  
+}
+```
+
+## Using the function "pdbplot" that we created to graph s1 
+
+```{r}
+pdbplot(s1)
+```
+```{r}
+pdbplot(s2)
+```
+```{r}
+pdbplot(s3)
+```
+
+
