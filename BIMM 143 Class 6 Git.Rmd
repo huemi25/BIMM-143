@@ -1,0 +1,164 @@
+---
+title: 'BIMM 143 Class 6'
+author: "Mi Tran A15556214"
+date: "10/26/2021"
+output: pdf_document
+---
+# Question 1
+
+>  Q1. Write a function grade() to determine an overall grade from a vector of student homework assignment scores dropping the lowest single score. If a student misses a homework (i.e. has an NA value) this can be used as a score to be potentially dropped. Your final function should be adquately explained with code comments and be able to work on an example class gradebook such as this one in CSV format: “https://tinyurl.com/gradeinput” [3pts]
+
+```{r}
+# Example input vectors to start with
+student1 <- c(100, 100, 100, 100, 100, 100, 100, 90)
+
+student2 <- c(100, NA, 90, 90, 90, 90, 97, 80)
+
+student3 <- c(90, NA, NA, NA, NA, NA, NA, NA)
+```
+
+```{r}
+#Using mean() to find the average of Student1
+student1 <- c(100, 100, 100, 100, 100, 100, 100, 90)
+
+mean(student1)
+```
+
+But...We need to drop the lowest score. First, we need to identify the lowest score of Student1.
+
+```{r}
+#Which element of the vector is the lowest?
+which.min(student1)
+```
+
+So, the 8th score of Student1 is the min score. What I want to do now is to drop (i.e. exclude) this lowest score from my mean() calculation
+
+```{r}
+# This will return everything but the 8th element of the vector
+student1[-8]
+```
+
+Now we can use the answer from which.min() to return all other elements of the vector.
+
+```{r}
+#This is our first working snippet
+mean(student1[-which.min(student1)])
+```
+
+What about Student2 and Student3? Will this work for them?
+
+We could try using na.rm=TRUE argument for mean() but this is not a good approach!
+
+```{r}
+student2 <- c(100, NA, 90, 90, 90, 90, 97, 80)
+mean(student2, na.rm=TRUE)
+
+student3 <- c(90, NA, NA, NA, NA, NA, NA, NA)
+mean(student3, na.rm=TRUE)
+```
+
+Another approach is to mask (i.e. replace) all NA values with zero
+
+First, we need to find the NA elements of the vectors. How do we find the NA elements?
+```{r}
+student2 <- c(100, NA, 90, 90, 90, 90, 97, 80)
+x <- student2
+
+is.na(x)
+which(is.na(x))
+```
+
+Now we have identified the NA elements, we want to "mask" them. Replace them with zero?
+
+```{r}
+# This is not quite what we are looking for
+# For Student2
+mean(x[-which(is.na(x))])
+```
+
+Instead we will make the NA elements zero
+
+```{r}
+# For Student2, this works!
+x[is.na(x)] <- 0
+x
+mean(x)
+```
+
+Recall we should drop the lowest score now...
+
+```{r}
+# For Student2
+x[is.na(x)] <- 0
+mean(x[-which.min(x)])
+```
+
+```{r}
+```
+
+
+```{r}
+# For Student3
+student3 <- c(90, NA, NA, NA, NA, NA, NA, NA)
+y <- student3
+y[is.na(y)] <- 0
+mean(y[-which.min(y)])
+```
+
+## Now we make our function
+
+Take the snippet and trun into a function
+Every function has 3 parts
+
+- A name, in our case 'grade()'
+- Input arguments, a vector of student scores
+- The body, i.e. our work snippet of code
+
+Using RStudio, I will select 'Code > Extract Function'
+
+```{r}
+grade <- function(x) {
+  x[is.na(x)] <- 0
+  mean(x[-which.min(x)])
+}
+```
+
+```{r}
+grade(student1)
+grade(student2)
+grade(student3)
+```
+
+This looks great! We now need to add comments to explain to our future selves and others who want to use this in the future! 
+
+```{r}
+#' Calculate the average score for a vector of student scores dropping
+#' the lowest score. Missing values will be treated as zero.
+#'
+#' @param x  A numeric vector of homework scores
+#'
+#' @return Average score
+#' @export
+#'
+#' @examples
+#'    student <- c(100, NA, 90, 97)
+#'    grade(student)
+#' 
+#' 
+grade <- function(x) {
+  # mask NA with zero
+  # treat missing values as zero
+  x[is.na(x)] <- 0
+  # exclude lowest score from mean
+  mean(x[-which.min(x)])
+}
+```
+
+Now finally, we can use our function on our "real" whole class data from this CVS format file:
+“https://tinyurl.com/gradeinput” 
+
+```{r}
+url <- "https://tinyurl.com/gradeinput"  
+gradebook <- read.csv(url, row.names = 1)
+gradebook
+```
