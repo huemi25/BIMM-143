@@ -1,37 +1,70 @@
-## Welcome to GitHub Pages
+# Welcome to my Bioinformatics Class BIMM 143 Online Porfolio
 
-You can use the [editor on GitHub](https://github.com/huemi25/BIMM-143/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This is my repository for my Bioinformatics class from UC San Diego in Fall 2021. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Index of Material
 
-### Markdown
+*Welcome to Bioinformatics*
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Class 1: [BIMM 143_Lab 1_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666291/BIMM.143_Lab.1_Mi.Tran.pdf)
 
-```markdown
-Syntax highlighted code block
+*Sequence Alignment Fundamentals, Algorithms and Applications*
 
-# Header 1
-## Header 2
-### Header 3
+Class 2: [BIMM 143_Lab 2_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666301/BIMM.143_Lab.2_Mi.Tran.pdf)
 
-- Bulleted
-- List
+Class 2 Global Alignment HW: [BIMM 143_Alignment HW_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666328/BIMM.143_Alignment.HW_Mi.Tran.pdf)
 
-1. Numbered
-2. List
+*(Project) Find a Gene Assignment*
+[BIMM 143_Find a Gene Project_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666311/BIMM.143_Find.a.Gene.Project_Mi.Tran.pdf)
 
-**Bold** and _Italic_ and `Code` text
+*Advanced Sequence Alignment and Database Searching*
 
-[Link](url) and ![Image](src)
-```
+Class 3: [BIMM 143_Lab 3_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666337/BIMM.143_Lab.3_Mi.Tran.pdf)
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+*Bioinformatics Data Analysis with R*
 
-### Jekyll Themes
+Class 4:[BIMM-143_Lab4_Mi-Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666370/BIMM-143_Lab4_Mi-Tran.pdf)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/huemi25/BIMM-143/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+*Data Exploration and Visualization in R*
 
-### Support or Contact
+Class 5: [BIMM 143_Lab 5_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666378/BIMM.143_Lab.5_Mi.Tran.pdf)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+*R Functions and R Packages from CRAN and BioConductor*
+
+Class 6: [BIMM 143_Lab 6_Mi Tran.pdf](https://github.com/huemi25/BIMM-143/files/7666381/BIMM.143_Lab.6_Mi.Tran.pdf)
+
+Class 6 Supplement: [BIMM 143 Class 6 HW Q6.pdf](https://github.com/huemi25/BIMM-143/files/7666399/BIMM.143.Class.6.HW.Q6.pdf)
+
+*Introduction to Machine Learning for Bioinformatics*
+
+Class 8: [BIMM 143 Class 8 Machine Learning Lab Report.pdf](https://github.com/huemi25/BIMM-143/files/7666411/BIMM.143.Class.8.Machine.Learning.Lab.Report.pdf)
+
+*Unsupervised Learning Mini-Project*
+
+Class 9: [BIMM 143 Class 9 Lab.pdf](https://github.com/huemi25/BIMM-143/files/7666434/BIMM.143.Class.9.Lab.pdf)
+
+*Structural Bioinformatics*
+
+Class 11: [BIMM 143 Lab 11.pdf](https://github.com/huemi25/BIMM-143/files/7666445/BIMM.143.Lab.11.pdf)
+
+*Essential UNIX for Bioinformatics*
+
+Class 13 HW: [BIMM 143 Class 13 HW_unix_questions.pdf](https://github.com/huemi25/BIMM-143/files/7666454/BIMM.143.Class.13.HW_unix_questions.pdf)
+
+*Transcriptomics and the Analysis of RNA-Seq Data*
+
+Class 15: [BIMM 143 Lab 15 Mi Tran .pdf](https://github.com/huemi25/BIMM-143/files/7666461/BIMM.143.Lab.15.Mi.Tran.pdf)
+
+*RNA-Seq Analysis Mini-Project*
+
+Class 16: [BIMM-143-Lab-16-Extra-Credit.pdf](https://github.com/huemi25/BIMM-143/files/7666470/BIMM-143-Lab-16-Extra-Credit.pdf)
+
+*Vaccination Rate Mini Project*
+
+Class 17: [BIMM 143 Lab 17 Mi Tran (Updated).pdf](https://github.com/huemi25/BIMM-143/files/7666475/BIMM.143.Lab.17.Mi.Tran.Updated.pdf)
+
+*Genome Informatics*
+
+Class 19 RNA-seq Galaxy: 
+
+Class 19 Population Analysis: 
