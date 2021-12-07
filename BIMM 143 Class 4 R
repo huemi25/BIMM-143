@@ -1,0 +1,7 @@
+# A plot from week 3
+x <-1:50
+
+plot(x, sin(x))
+
+# Make this a bit nicer
+plot(x, sin(x), typ="l", col="blue", lwd=2)
