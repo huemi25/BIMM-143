@@ -1,0 +1,182 @@
+---
+title: "BIMM 143 Lab 11 Structural Bioinformatics (Part 1)"
+author: "Mi Tran A15556214"
+date: "11/14/2021"
+output: pdf_document
+---
+# 1. Introduction to the RCSB Protein Data Bank (PDB)
+## PBD Statistics
+First, download the 'PDB Data Distribution by Experimental Method and Molecular Type' CSV file and import to RStudio. 
+```{r}
+PDB1 <- read.csv("/Users/mihuetran/Desktop/BIMM 143/BIMM-143 Lab 11 Part 1/PDB1.csv", row.names = 1)
+head(PDB1)
+```
+> Q1. What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy? 
+**87.52% of structures are solved by X-Ray, and 4.96% of structures are solved by Electron Microscopy.**
+
+```{r}
+method.sums <- colSums(PDB1)
+round((method.sums/method.sums["Total"])*100,2)
+```
+
+> Q2. What proportion of structures in the PDB are protein?
+
+```{r}
+round((PDB1$Total/method.sums["Total"])*100,2)
+```
+> Q3. Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB? **1,828 structures**
+
+## The PDB Format
+Downloaded HIV-1 protease structure (PDB code: 1HSG)
+
+# 2. Visualizing the HIV-1 protease structure
+## Getting to know VMD
+> Q4. Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure? **VMD only shows the oxygen atom and not the hydrogen atoms.**
+
+> Q5.There is a conserved water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have (see note below)?
+**The residue number of this HOH is 127.**
+
+> Q6: As you have hopefully observed HIV protease is a homodimer (i.e. it is composed of two identical chains). With the aid of the graphic display and the sequence viewer extension can you identify secondary structure elements that are likely to only form in the dimer rather than the monomer? **87 ARG**
+
+# 3. Introduction to Bio3D in R
+
+First, install and load the bio3d package 
+```{r}
+#install.packages("bio3d")
+library(bio3d)
+```
+
+## Reading PBD file data into R
+
+```{r}
+#Note: Accessing online PDB file of 1HSG
+pdb <- read.pdb("1hsg")
+```
+
+Summary of the PDB content
+```{r}
+pdb
+```
+> Q7. How many amino acid residues are there in this pdb object? **198**
+
+> Q8. Name one of the two non-protein residues? **HOH(127), MK1(1)**
+
+> Q9. How many protein chains are in this structure? **2**
+
+To find the attributes of any object
+```{r}
+attributes(pdb)
+```
+
+To access these individual attributes we use the dollar-attribute name convention that is common with R list objects. For example, to access the atom attribute or component use pdb$atom:
+```{r}
+head(pdb$atom)
+```
+
+# 4. Comparative structure analysis of Adenylate Kinase
+## Setup
+Install the packages 
+```{r}
+# Install packages in the R console not your Rmd
+
+#install.packages("bio3d")
+#install.packages("ggplot2")
+#install.packages("ggrepel")
+#install.packages("devtools")
+#install.packages("BiocManager")
+
+#aBiocManager::install("msa")
+#devtools::install_bitbucket("Grantlab/bio3d-view")
+```
+
+> Q10. Which of the packages above is found only on BioConductor and not CRAN? **The msa package**
+
+> Q11. Which of the above packages is not found on BioConductor or CRAN?: **The "Grantlab/bio3d-view" package**
+
+> Q12. True or False? Functions from the devtools package can be used to install packages from GitHub and BitBucket? **TRUE**
+
+## Search and retrieve ADK structures
+```{r}
+library(bio3d)
+aa <- get.seq("1ake_A")
+aa
+```
+> Q13. How many amino acids are in this sequence, i.e. how long is this sequence? **214 amino acids**
+
+Now we can use this sequence as a query to BLAST search the PDB to find similar sequences and structures.
+```{r}
+# Blast or hmmer search 
+b <- blast.pdb(aa)
+```
+
+The function plot.blast() facilitates the visualization and filtering of the Blast results. It will attempt to set a seed position to the point of largest drop-off in normalized scores (i.e. the biggest jump in E-values). In this particular case we specify a cutoff (after initial plotting) of to include only the relevant E.coli structures:
+```{r}
+# Plot a summary of search results
+hits <- plot(b)
+```
+Figure 6: Blast results. Visualize and filter blast results through function plot.blast(). Here we proceed with only the top scoring hits (black).
+
+```{r}
+# List out some 'top hits'
+head(hits$pdb.id)
+```
+
+We can now use function get.pdb() and pdbslit() to fetch and parse the identified structures.
+```{r}
+# Download releated PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+## Align and superpose structures
+Next we will use the pdbaln() function to align and also optionally fit (i.e. superpose) the identified PDB structures.
+```{r}
+# Align releated PDBs
+# pdbs <- pdbaln(files, fit = TRUE)#, exefile="msa")
+```
+
+```{r}
+# Vector containing PDB codes for figure axis
+#ids <- basename.pdb(pdbs$id)
+
+# Draw schematic alignment
+#plot(pdbs, labels=ids)
+```
+
+PCA can be performed on the structural ensemble (stored in the pdbs object) with the function pca.xyz(), or more simply pca().
+
+```{r}
+# Perform PCA
+#pc.xray <- pca(pdbs)
+#plot(pc.xray)
+```
+
+
+```{r}
+# Calculate RMSD
+#rd <- rmsd(pdbs)
+
+# Structure-based clustering
+#hc.rd <- hclust(dist(rd))
+#grps.rd <- cutree(hc.rd, k=3)
+
+#plot(pc.xray, 1:2, col="grey50", bg=grps.rd, pch=21, cex=1)
+```
+
+
+# 6. Normal mode analysis
+
+```{r}
+# NMA of all structures
+#modes <- nma(pdbs)
+```
+
+```{r}
+#plot(modes, pdbs, col=grps.rd)
+```
+
+> Q14. What do you note about this plot? Are the black and colored lines similar or different? Where do you think they differ most and why? 
+**The red and green lines are similar to each other, and the black line is different. The colored lines have higher fluctuations, while the black line has lower fluctuations in general. They differ the most at residue #50, 130, 150. I think they differ because those residues are at binding sites that are conservative and not active binding sites.**
+
+
+
+
