@@ -54,8 +54,8 @@ Class 17: [Vaccination Rate Mini Project (PDF)](https://github.com/huemi25/BIMM-
 
 Class 17: [Vaccination Rate Mini Project (RMD)](https://github.com/huemi25/BIMM-143/blob/0da1b0530b8f840397f29cd84a0656e29de07426/BIMM%20143%20Lab%2017%20Mi%20Tran%202.Rmd)
 
-Class 19 RNA-seq Galaxy: [Genome Informatics - RNASeq Galaxy]
+Class 19 RNA-seq Galaxy: [Genome Informatics - RNASeq Galaxy (PDF)](https://github.com/huemi25/BIMM-143/blob/702f6b98f830ea92a3aa99c582b20729db81d495/BIMM%20143_Lab%2019_Mi%20Tran.pdf)
 
-Class 19 Population Analysis: [Genome Informatics - Population analysis]
+Class 19 Population Analysis: [Genome Informatics - Population analysis](https://github.com/huemi25/BIMM-143/blob/4926c0a3e7a527607ba5211ad7abd02a1e9e597c/BIMM%20143%20Class%2019%20HW%20EC.Rmd)
 
 Final Project: [Find a Gene Assignment PDF](https://github.com/huemi25/BIMM-143/files/7666311/BIMM.143_Find.a.Gene.Project_Mi.Tran.pdf)
